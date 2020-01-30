@@ -8,6 +8,6 @@ public class BibliotecaApp {
 
         System.out.println(library.showWelcomeMsg());
 
-        System.out.println(library.showBookList());
+        System.out.println(library.showBookListBasicData());
     }
 }
