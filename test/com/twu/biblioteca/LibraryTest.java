@@ -17,7 +17,7 @@ public class LibraryTest {
     public void shouldShowListBooksTitles(){
         Library library = new Library();
 
-        assertEquals( "1984".concat("\n")+ "Harry Potter and the Philosopher's Stone".concat("\n") + "Little Women".concat("\n"), library.showBookList());
+        assertEquals( "1984".concat("\n")+ "Harry Potter and the Philosopher's Stone".concat("\n") + "Little Women".concat("\n"), library.showBookListOnlyTitles());
     }
 
     @Test

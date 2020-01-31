@@ -7,16 +7,18 @@ public class BibliotecaApp {
     public static void main(String[] args) {
 
         Library library = new Library();
-
-        Menu menu =new Menu();
+        Menu menu = new Menu();
 
         System.out.println(library.showWelcomeMsg());
 
-        System.out.println(menu.showPredefinedMenu());
+        System.out.println(menu.showMenu());
 
         Scanner scanner = new Scanner( System. in);
         String inputString = scanner. nextLine();
 
-        System.out.println(library.showBookListBasicData());
+        if(Boolean.valueOf(menu.continueWithFunctionality(inputString)))
+            System.out.println(library.showBookListBasicData());
+
+        else System.out.println(menu.continueWithFunctionality(inputString));
     }
 }
