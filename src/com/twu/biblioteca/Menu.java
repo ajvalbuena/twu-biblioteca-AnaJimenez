@@ -9,12 +9,27 @@ public class Menu {
     private Integer selectedId;
 
 
- public String showMenu(){
+    public Menu(){
+        this.setPredefinedMenu();
+    }
+
+    public void setPredefinedMenu(){
+
+        MenuItem item1 = new MenuItem(1, "Quit App");
+        MenuItem item2 = new MenuItem(2, "List of books");
+        itemList = new ArrayList<MenuItem>();
+        itemList.add(item1);
+        itemList.add(item2);
+
+    }
+
+
+
+    public String showMenu(){
      String menuList = "";
-    this.setPredefinedMenu();
 
     for (MenuItem item: itemList)
-          menuList+= item.getId().toString()+ "-" +item.getOption();
+          menuList+= item.getId().toString()+ "-" +item.getOption()+'\n';
 
     return menuList;
  }
@@ -27,12 +42,29 @@ public class Menu {
         return false;
     }
 
-    public void setPredefinedMenu(){
 
-        MenuItem item1 = new MenuItem(1, "List of books");
-        itemList = new ArrayList<MenuItem>();
-        itemList.add(item1);
 
+    public String showMsgInvalidSelectedOption() {
+
+     return "Please select a valid option!";
+    }
+
+    public boolean isMenuInputOK(String userInput) {
+     try {
+         this.setSelectedId(Integer.parseInt(userInput));
+
+         if(!isSelectedIdValid())
+             throw new Exception();
+
+     }catch (Exception e){
+         return false;
+     }
+     return true;
+    }
+
+
+    public boolean isQuitApp() {
+     return this.selectedId.equals(1);
     }
 
 
@@ -50,23 +82,5 @@ public class Menu {
 
     public void setSelectedId(Integer selectedId) {
         this.selectedId = selectedId;
-    }
-
-    public String showMsgInvalidSelectedOption() {
-
-     return "Please select a valid option!";
-    }
-
-    public String continueWithFunctionality(String userInput) {
-     try {
-         setSelectedId(Integer.parseInt(userInput));
-
-         if(!isSelectedIdValid())
-             throw new Exception();
-     }catch (Exception e){
-         return showMsgInvalidSelectedOption();
-
-     }
-     return "true";
     }
 }

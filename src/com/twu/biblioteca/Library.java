@@ -6,14 +6,13 @@ import java.util.List;
 public class Library {
     private List<Book> bookList;
 
-
-    public String showWelcomeMsg(){
-    return "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
-    }
+public Library(){
+    this.setPredefinedBookList();
+}
 
     public String showBookListOnlyTitles() {
         String listOfBooks = "";
-        this.setPredefinedBookList();
+
 
         for(Book book: this.bookList){
 
@@ -24,7 +23,6 @@ public class Library {
     }
     public String showBookListBasicData() {
         String listOfBooks = "";
-        this.setPredefinedBookList();
 
         for(Book book: this.bookList){
 

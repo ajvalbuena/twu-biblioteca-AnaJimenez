@@ -9,7 +9,7 @@ public class MenuTest {
     public void shouldShowMenuItem(){
         Menu menu = new Menu();
 
-        assertEquals("1-List of books", menu.showMenu());
+        assertEquals("1-Quit App\n2-List of books\n", menu.showMenu());
     }
 
 
@@ -46,7 +46,7 @@ public class MenuTest {
         Menu menu = new Menu();
         menu.setPredefinedMenu();
 
-        assertEquals("Please select a valid option!", menu.continueWithFunctionality("ssss"));
+        assertEquals(false, menu.isMenuInputOK("ssss"));
 
     }
 
@@ -55,16 +55,46 @@ public class MenuTest {
         Menu menu = new Menu();
         menu.setPredefinedMenu();
 
-        assertEquals("Please select a valid option!", menu.continueWithFunctionality("2"));
+        assertEquals(false, menu.isMenuInputOK("6"));
 
     }
 
     @Test
-    public void shouldContinueWhenSelectedOptionValid(){
+    public void shouldReturnTrueWhenSelectedOptionValid(){
         Menu menu = new Menu();
         menu.setPredefinedMenu();
 
-        assertEquals(true, Boolean.valueOf(menu.continueWithFunctionality("1")));
+        assertEquals(true,menu.isMenuInputOK("1"));
+
+    }
+
+    @Test
+    public void shouldReturnTrueWhenSelectedOptionValid2(){
+        Menu menu = new Menu();
+        menu.setPredefinedMenu();
+
+        assertEquals(true,menu.isMenuInputOK("2"));
+
+    }
+
+    @Test
+    public void shouldReturnTrueWhenSelectedOptionIs2(){
+        Menu menu = new Menu();
+        menu.setPredefinedMenu();
+        menu.setSelectedId(2);
+
+        assertEquals(false,menu.isQuitApp());
+
+    }
+
+
+    @Test
+    public void shouldReturnFalseWhenSelectedOptionIs1(){
+        Menu menu = new Menu();
+        menu.setPredefinedMenu();
+        menu.setSelectedId(1);
+
+        assertEquals(true,menu.isQuitApp());
 
     }
 }
