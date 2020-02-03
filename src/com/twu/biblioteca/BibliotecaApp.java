@@ -68,7 +68,7 @@ public class BibliotecaApp {
                     return library.returnABook(inputIdReturn);
 
                 default:
-                    return "";
+                    return menu.showMsgInvalidSelectedOption();
 
             }
 

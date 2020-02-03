@@ -229,6 +229,30 @@ public class LibraryTest {
 
     }
 
+    @Test
+    public void shouldShowErrMsgWhenReturnInputIsAString(){
+        Library library = new Library();
+
+        assertEquals("That is not a valid book return", library.returnABook("hey"));
+
+    }
+
+    @Test
+    public void shouldShowErrMsgWhenReturnWithInvalidId(){
+        Library library = new Library();
+
+        assertEquals("That is not a valid book return", library.returnABook("44"));
+
+    }
+
+    @Test
+    public void shouldShowErrMsgWhenAFreeBookWantsToBeReturned(){
+        Library library = new Library();
+
+        assertEquals("That is not a valid book return", library.returnABook("1"));
+
+    }
+
 
 
 

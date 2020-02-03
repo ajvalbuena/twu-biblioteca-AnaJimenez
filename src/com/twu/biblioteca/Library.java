@@ -8,6 +8,7 @@ public class Library {
     public static final String confirmationMsgWhenBookIsCheckedOut = "Thank you! Enjoy the book";
     public static final String errorMsgWhenBookIsNotCheckedOut = "Sorry, that book is not available";
     public static final String confirmationMsgWhenBookIsReturned = "Thank you for returning the book";
+    public static final String errorMsgWhenBookIsNotReturned = "That is not a valid book return";
 
 public Library(){
     this.setPredefinedBookList();
@@ -131,6 +132,6 @@ public Library(){
         if(this.continueWithBookReturning(inputString)) {
             this.returnBookId(Integer.parseInt(inputString));
             return confirmationMsgWhenBookIsReturned;
-        } return "";
+        } return errorMsgWhenBookIsNotReturned;
     }
 }

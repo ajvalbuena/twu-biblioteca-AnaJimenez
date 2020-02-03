@@ -193,4 +193,52 @@ public class BibliotecaTest {
 
     }
 
+    @Test
+    public void shouldShowErrorMsgWhenBookIsNotReturnedInvalidId(){
+
+        Menu menu = new Menu();
+        Library library = new Library();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        String input = "18";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+
+        assertEquals(library.errorMsgWhenBookIsNotReturned,
+                bibliotecaApp.controlAccessMenuOptions(menu, library, "3"));
+
+    }
+
+    @Test
+    public void shouldShowErrorMsgWhenBookIsNotReturnedInvalidInput(){
+
+        Menu menu = new Menu();
+        Library library = new Library();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        String input = "hhh";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+
+        assertEquals(library.errorMsgWhenBookIsNotReturned,
+                bibliotecaApp.controlAccessMenuOptions(menu, library, "3"));
+
+    }
+
+    @Test
+    public void shouldShowErrorMsgWhenBookIsAlreadyFree(){
+
+        Menu menu = new Menu();
+        Library library = new Library();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        String input = "2";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+
+        assertEquals(library.errorMsgWhenBookIsNotReturned,
+                bibliotecaApp.controlAccessMenuOptions(menu, library, "3"));
+
+    }
+
 }
