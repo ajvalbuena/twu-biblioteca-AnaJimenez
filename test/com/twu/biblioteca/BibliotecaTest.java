@@ -60,10 +60,6 @@ public class BibliotecaTest {
     }
 
 
-
-
-
-
     @Test
     public void shouldShowErrorMesgWhenIsAnInvalidOption(){
 
@@ -77,7 +73,7 @@ public class BibliotecaTest {
 
 
     @Test
-    public void shouldCheckOutABookWhenIdCorrectAndBookIsFreeTest2(){
+    public void shouldCheckOutABookWhenIdCorrectAndBookIsFreeTest(){
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -91,5 +87,19 @@ public class BibliotecaTest {
 
     }
 
+    @Test
+    public void shouldShowConfirmationMsgWhenBookIsCheckedOut(){
+
+        Menu menu = new Menu();
+        Library library = new Library();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+
+        assertEquals(library.confirmationMsgWhenBookIsCheckedOut, bibliotecaApp.controlAccessCheckingOutBooks(menu, library, input));
+
+    }
 
 }

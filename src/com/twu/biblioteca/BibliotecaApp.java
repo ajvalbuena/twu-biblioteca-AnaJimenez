@@ -52,12 +52,11 @@ public class BibliotecaApp {
         } else {
             System.out.println(library.showAvailableBookListBasicData());
 
-                Scanner scanner = new Scanner( System. in);
-                String inputId = scanner.nextLine();
+            Scanner scanner = new Scanner( System. in);
+            String inputId = scanner.nextLine();
 
-                library.checkOutABook(inputId);
+            return library.checkOutABook(inputId);
 
-            return "";
         }
     }
 }

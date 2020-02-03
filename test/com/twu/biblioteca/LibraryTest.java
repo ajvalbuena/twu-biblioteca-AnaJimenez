@@ -110,4 +110,13 @@ public class LibraryTest {
     }
 
 
+    @Test
+    public void shouldShowCorrectMsgWhenCheckOutIsSuccesful(){
+        Library library = new Library();
+
+        assertEquals("Thank you! Enjoy the book", library.checkOutABook("1"));
+
+    }
+
+
 }

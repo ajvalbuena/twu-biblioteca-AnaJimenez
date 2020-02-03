@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Library {
     private List<Book> bookList;
+    public static final String confirmationMsgWhenBookIsCheckedOut = "Thank you! Enjoy the book";
 
 public Library(){
     this.setPredefinedBookList();
@@ -94,8 +95,11 @@ public Library(){
     }
 
 
-    public void checkOutABook(String inputString){
-        if(this.continueWithBookCheckOut(inputString))
-            this.checkOutBookId(Integer.parseInt(inputString)) ;
+    public String checkOutABook(String inputString){
+        if(this.continueWithBookCheckOut(inputString)) {
+            this.checkOutBookId(Integer.parseInt(inputString));
+            return confirmationMsgWhenBookIsCheckedOut;
+        } return "";
     }
+
 }
