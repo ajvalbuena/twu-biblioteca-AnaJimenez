@@ -176,6 +176,21 @@ public class BibliotecaTest {
 
     }
 
+    @Test
+    public void shouldShowConfirmationMsgWhenBookIsReturned(){
 
+        Menu menu = new Menu();
+        Library library = new Library();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        library.checkOutBookId(1);
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+
+        assertEquals(library.confirmationMsgWhenBookIsReturned,
+                bibliotecaApp.controlAccessMenuOptions(menu, library, "3"));
+
+    }
 
 }

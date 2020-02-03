@@ -7,6 +7,7 @@ public class Library {
     private List<Book> bookList;
     public static final String confirmationMsgWhenBookIsCheckedOut = "Thank you! Enjoy the book";
     public static final String errorMsgWhenBookIsNotCheckedOut = "Sorry, that book is not available";
+    public static final String confirmationMsgWhenBookIsReturned = "Thank you for returning the book";
 
 public Library(){
     this.setPredefinedBookList();
@@ -126,8 +127,10 @@ public Library(){
         } return errorMsgWhenBookIsNotCheckedOut;
     }
 
-    public void returnABook(String inputString){
-        if(this.continueWithBookReturning(inputString))
+    public String returnABook(String inputString){
+        if(this.continueWithBookReturning(inputString)) {
             this.returnBookId(Integer.parseInt(inputString));
+            return confirmationMsgWhenBookIsReturned;
+        } return "";
     }
 }

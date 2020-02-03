@@ -220,6 +220,15 @@ public class LibraryTest {
 
     }
 
+    @Test
+    public void shouldShowSuccessMsgWhenOneBookReturningIsOK(){
+        Library library = new Library();
+        library.checkOutABook("1");
+
+        assertEquals("Thank you for returning the book", library.returnABook("1"));
+
+    }
+
 
 
 

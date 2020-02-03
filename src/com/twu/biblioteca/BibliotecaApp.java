@@ -65,8 +65,7 @@ public class BibliotecaApp {
                     Scanner scannerReturn = new Scanner( System. in);
                     String inputIdReturn = scannerReturn.nextLine();
 
-                    library.returnABook(inputIdReturn);
-                    return "";
+                    return library.returnABook(inputIdReturn);
 
                 default:
                     return "";
