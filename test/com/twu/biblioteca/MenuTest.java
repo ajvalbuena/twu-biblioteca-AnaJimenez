@@ -77,6 +77,7 @@ public class MenuTest {
 
     }
 
+
     @Test
     public void shouldReturnTrueWhenSelectedOptionIs2(){
         Menu menu = new Menu();
@@ -95,6 +96,16 @@ public class MenuTest {
         menu.setSelectedId(1);
 
         assertEquals(true,menu.isQuitApp());
+
+    }
+
+    @Test
+    public void shouldReturnFalseWhenSelectedOptionIs3(){
+        Menu menu = new Menu();
+        menu.setPredefinedMenu();
+        menu.setSelectedId(3);
+
+        assertEquals(false,menu.isQuitApp());
 
     }
 }

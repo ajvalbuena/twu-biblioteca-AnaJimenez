@@ -4,11 +4,31 @@ public class Book {
     private String title;
     private String author;
     private String year;
+    private boolean free;
+    private Integer id;
 
-    public Book (String title, String author, String year){
+    public Book (Integer id, String title, String author, String year){
+        this.id = id;
         this.title = title;
         this.author = author;
         this.year = year;
+        this.free = true;
+    }
+
+    public boolean isFree() {
+        return free;
+    }
+
+    public void setFree(boolean free) {
+        this.free = free;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getAuthor() {

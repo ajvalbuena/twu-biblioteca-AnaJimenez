@@ -17,29 +17,47 @@ public class BibliotecaApp {
         Scanner scanner = new Scanner( System. in);
         String inputString = scanner.nextLine();
 
-        while(bibliotecaApp.continueWithMenu(inputString, menu, library)){
+        while(bibliotecaApp.continueWithMenu(inputString, menu, library, bibliotecaApp)){
+            System.out.println(bibliotecaApp.controlAccessCheckingOutBooks(menu, library, inputString));
+
             System.out.println(menu.showMenu());
             inputString = scanner.nextLine();
         }
     }
-    
+
 
     public String showWelcomeMsg(){
         return "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
     }
 
 
-    public Boolean continueWithMenu(String inputString, Menu menu, Library library) {
+    public Boolean continueWithMenu(String inputString, Menu menu, Library library, BibliotecaApp bibliotecaApp) {
 
         if( !menu.isMenuInputOK(inputString)){
-            System.out.println(menu.showMsgInvalidSelectedOption());
             return true;
         }else {
             if(menu.isQuitApp()) return false;
             else{
-                System.out.println(library.showBookListBasicData());
                 return true;
             }
+        }
+    }
+
+
+    public String controlAccessCheckingOutBooks(Menu menu, Library library, String inputString) {
+
+        if (!menu.isMenuInputOK(inputString)) {
+            return menu.showMsgInvalidSelectedOption();
+
+        } else {
+            System.out.println(library.showAvailableBookListBasicData());
+
+                Scanner scanner = new Scanner( System. in);
+                String inputId = scanner.nextLine();
+
+                library.checkOutABook(inputId);
+
+            return "";
         }
     }
 }
