@@ -118,5 +118,28 @@ public class LibraryTest {
 
     }
 
+    @Test
+    public void shouldShowErrMsgWhenCheckoutInputIsAString(){
+        Library library = new Library();
 
+        assertEquals("Sorry, that book is not available", library.checkOutABook("hey"));
+
+    }
+
+    @Test
+    public void shouldShowErrMsgWhenCheckoutInputIsInvalidId(){
+        Library library = new Library();
+
+        assertEquals("Sorry, that book is not available", library.checkOutABook("44"));
+
+    }
+
+    @Test
+    public void shouldShowErrMsgWhenCheckoutInputIsIdOfAnUnavailableBook(){
+        Library library = new Library();
+        library.getBookById(1).setFree(false);
+
+        assertEquals("Sorry, that book is not available", library.checkOutABook("1"));
+
+    }
 }

@@ -98,8 +98,54 @@ public class BibliotecaTest {
         System.setIn(in);
 
 
-        assertEquals(library.confirmationMsgWhenBookIsCheckedOut, bibliotecaApp.controlAccessCheckingOutBooks(menu, library, input));
+        assertEquals(library.confirmationMsgWhenBookIsCheckedOut, bibliotecaApp.controlAccessCheckingOutBooks(menu, library, "2"));
 
     }
 
+
+    @Test
+    public void shouldShowErrorMsgWhenBookIsNotCheckedOutInvalidId(){
+
+        Menu menu = new Menu();
+        Library library = new Library();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        String input = "18";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+
+        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessCheckingOutBooks(menu, library, "2"));
+
+    }
+
+    @Test
+    public void shouldShowErrorMsgWhenBookIsNotCheckedOutInvalidInput(){
+
+        Menu menu = new Menu();
+        Library library = new Library();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        String input = "hhh";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+
+        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessCheckingOutBooks(menu, library, "2"));
+
+    }
+
+    @Test
+    public void shouldShowErrorMsgWhenBookIsAlreadyCheckedOut(){
+
+        Menu menu = new Menu();
+        Library library = new Library();
+        library.getBookById(2).setFree(false);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        String input = "2";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+
+        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessCheckingOutBooks(menu, library, "2"));
+
+    }
 }

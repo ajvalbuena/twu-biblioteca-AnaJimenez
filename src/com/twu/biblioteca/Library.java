@@ -6,6 +6,7 @@ import java.util.List;
 public class Library {
     private List<Book> bookList;
     public static final String confirmationMsgWhenBookIsCheckedOut = "Thank you! Enjoy the book";
+    public static final String errorMsgWhenBookIsNotCheckedOut = "Sorry, that book is not available";
 
 public Library(){
     this.setPredefinedBookList();
@@ -99,7 +100,8 @@ public Library(){
         if(this.continueWithBookCheckOut(inputString)) {
             this.checkOutBookId(Integer.parseInt(inputString));
             return confirmationMsgWhenBookIsCheckedOut;
-        } return "";
+
+        } return errorMsgWhenBookIsNotCheckedOut;
     }
 
 }
