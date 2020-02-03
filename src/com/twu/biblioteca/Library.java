@@ -63,6 +63,10 @@ public Library(){
         this.getBookById(id).setFree(false);
     }
 
+    public void returnBookId(Integer id){
+        this.getBookById(id).setFree(true);
+    }
+
     public List<Book> getBookList() {
         return bookList;
     }
@@ -96,6 +100,24 @@ public Library(){
     }
 
 
+    public boolean continueWithBookReturning(String inputId) {
+
+        try {
+            int inputIdInt = Integer.parseInt(inputId);
+
+            if(this.getBookById(inputIdInt)==null)
+                return false;
+
+            else if (this.getBookById(inputIdInt).isFree())
+                return false;
+
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+
     public String checkOutABook(String inputString){
         if(this.continueWithBookCheckOut(inputString)) {
             this.checkOutBookId(Integer.parseInt(inputString));
@@ -104,4 +126,8 @@ public Library(){
         } return errorMsgWhenBookIsNotCheckedOut;
     }
 
+    public void returnABook(String inputString){
+        if(this.continueWithBookReturning(inputString))
+            this.returnBookId(Integer.parseInt(inputString));
+    }
 }

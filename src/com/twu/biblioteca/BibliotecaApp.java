@@ -18,7 +18,7 @@ public class BibliotecaApp {
         String inputString = scanner.nextLine();
 
         while(bibliotecaApp.continueWithMenu(inputString, menu, library, bibliotecaApp)){
-            System.out.println(bibliotecaApp.controlAccessCheckingOutBooks(menu, library, inputString));
+            System.out.println(bibliotecaApp.controlAccessMenuOptions(menu, library, inputString));
 
             System.out.println(menu.showMenu());
             inputString = scanner.nextLine();
@@ -44,19 +44,37 @@ public class BibliotecaApp {
     }
 
 
-    public String controlAccessCheckingOutBooks(Menu menu, Library library, String inputString) {
+    public String controlAccessMenuOptions(Menu menu, Library library, String inputString) {
 
         if (!menu.isMenuInputOK(inputString)) {
             return menu.showMsgInvalidSelectedOption();
 
         } else {
-            System.out.println(library.showAvailableBookListBasicData());
 
-            Scanner scanner = new Scanner( System. in);
-            String inputId = scanner.nextLine();
+            switch (menu.getSelectedId()){
 
-            return library.checkOutABook(inputId);
+                case 2:
+                    System.out.println(library.showAvailableBookListBasicData());
+
+                    Scanner scannerCheckOut = new Scanner( System. in);
+                    String inputIdCheckOut = scannerCheckOut.nextLine();
+
+                    return library.checkOutABook(inputIdCheckOut);
+
+                case 3:
+                    Scanner scannerReturn = new Scanner( System. in);
+                    String inputIdReturn = scannerReturn.nextLine();
+
+                    library.returnABook(inputIdReturn);
+                    return "";
+
+                default:
+                    return "";
+
+            }
+
 
         }
     }
 }
+

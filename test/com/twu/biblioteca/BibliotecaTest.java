@@ -30,6 +30,17 @@ public class BibliotecaTest {
     }
 
     @Test
+    public void shouldContinueWithMenuWhenOptionIs3 (){
+
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        Menu menu = new Menu();
+        Library library = new Library();
+
+        assertEquals(true,
+                bibliotecaApp.continueWithMenu("3", menu, library, bibliotecaApp));
+    }
+
+    @Test
     public void shouldQuitWhenOptionIs1 (){
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
@@ -61,19 +72,19 @@ public class BibliotecaTest {
 
 
     @Test
-    public void shouldShowErrorMesgWhenIsAnInvalidOption(){
+    public void shouldShowErrorMesgWhenIsAnInvalidOptionInMenu(){
 
         Menu menu = new Menu();
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         Library library = new Library();
 
-        assertEquals("Please select a valid option!", bibliotecaApp.controlAccessCheckingOutBooks(menu, library,"hola"));
+        assertEquals("Please select a valid option!", bibliotecaApp.controlAccessMenuOptions(menu, library,"hola"));
 
     }
 
 
     @Test
-    public void shouldCheckOutABookWhenIdCorrectAndBookIsFreeTest(){
+    public void shouldCheckOutABookWhenIdCorrectAndBookIsFree(){
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -82,7 +93,7 @@ public class BibliotecaTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        bibliotecaApp.controlAccessCheckingOutBooks(menu, library, input);
+        bibliotecaApp.controlAccessMenuOptions(menu, library, "2");
         assertEquals(false, library.getBookById(1).isFree());
 
     }
@@ -98,7 +109,7 @@ public class BibliotecaTest {
         System.setIn(in);
 
 
-        assertEquals(library.confirmationMsgWhenBookIsCheckedOut, bibliotecaApp.controlAccessCheckingOutBooks(menu, library, "2"));
+        assertEquals(library.confirmationMsgWhenBookIsCheckedOut, bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
 
     }
 
@@ -114,7 +125,7 @@ public class BibliotecaTest {
         System.setIn(in);
 
 
-        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessCheckingOutBooks(menu, library, "2"));
+        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
 
     }
 
@@ -129,7 +140,7 @@ public class BibliotecaTest {
         System.setIn(in);
 
 
-        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessCheckingOutBooks(menu, library, "2"));
+        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
 
     }
 
@@ -145,7 +156,26 @@ public class BibliotecaTest {
         System.setIn(in);
 
 
-        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessCheckingOutBooks(menu, library, "2"));
+        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
 
     }
+
+
+    @Test
+    public void shouldReturnABookWhenIdCorrectAndBookIsNotFree(){
+
+        Menu menu = new Menu();
+        Library library = new Library();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        bibliotecaApp.controlAccessMenuOptions(menu, library, "3");
+        assertEquals(true, library.getBookById(1).isFree());
+
+    }
+
+
+
 }

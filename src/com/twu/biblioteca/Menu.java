@@ -15,11 +15,10 @@ public class Menu {
 
     public void setPredefinedMenu(){
 
-        MenuItem item1 = new MenuItem(1, "Quit App");
-        MenuItem item2 = new MenuItem(2, "List of books");
         itemList = new ArrayList<MenuItem>();
-        itemList.add(item1);
-        itemList.add(item2);
+        itemList.add(new MenuItem(1, "Quit App"));
+        itemList.add(new MenuItem(2, "List of books"));
+        itemList.add(new MenuItem(3, "Return a book"));
 
     }
 

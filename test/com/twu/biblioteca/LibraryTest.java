@@ -142,4 +142,90 @@ public class LibraryTest {
         assertEquals("Sorry, that book is not available", library.checkOutABook("1"));
 
     }
+
+    //////////////////////////////
+    @Test
+    public void shouldShowBookIsFreeWhenIsReturned(){
+        Library library = new Library();
+        library.getBookById(1).setFree(false);
+        library.returnBookId(1);
+
+        assertEquals(true, library.getBookById(1).isFree());
+    }
+    @Test
+    public void shouldContinueWithBookReturningWhenInsertedBookId1 (){
+        Library library = new Library();
+        library.getBookById(1).setFree(false);
+        assertEquals(true, library.continueWithBookReturning("1"));
+    }
+
+    @Test
+    public void shouldNotContinueWithBookReturningWhenInsertedBookIdIs6 (){
+        Library library = new Library();
+
+        assertEquals(false, library.continueWithBookReturning("6"));
+    }
+
+    @Test
+    public void shouldNotContinueWithBookReturningWhenInputIsNotInt (){
+        Library library = new Library();
+
+        assertEquals(false, library.continueWithBookReturning("rgs"));
+    }
+
+    @Test
+    public void shouldNotContinueWithBookReturningWhenBookIsFree(){
+        Library library = new Library();
+
+        assertEquals(false, library.continueWithBookReturning("1"));
+    }
+
+
+    @Test
+    public void shouldReturnABookWhenIdCorrectAndBookIsNotFree(){
+        Library library = new Library();
+        library.getBookById(1).setFree(false);
+        library.returnABook("1");
+
+        assertEquals(true, library.getBookById(1).isFree());
+
+    }
+
+    @Test
+    public void shouldNotReturnABookWhenIdCorrectAndBookIsFree(){
+        Library library = new Library();
+        library.returnABook("1");
+
+        assertEquals(true, library.getBookById(1).isFree());
+
+    }
+
+    @Test
+    public void shouldNotReturnABookWhenIdNoCorrect(){
+        Library library = new Library();
+        library.returnABook("ggggg");
+
+        assertEquals(true, library.getBookById(1).isFree());
+
+    }
+
+    @Test
+    public void shouldNotReturnABookWhenItIsAlreadyReturned(){
+        Library library = new Library();
+        library.getBookById(1).setFree(false);
+        library.returnABook("1");
+        library.returnABook("1");
+
+        assertEquals(true, library.getBookById(1).isFree());
+
+    }
+
+
+
+
+
+
+
+
+
 }

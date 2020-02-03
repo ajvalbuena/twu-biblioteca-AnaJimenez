@@ -9,7 +9,7 @@ public class MenuTest {
     public void shouldShowMenuItem(){
         Menu menu = new Menu();
 
-        assertEquals("1-Quit App\n2-List of books\n", menu.showMenu());
+        assertEquals("1-Quit App\n2-List of books\n3-Return a book\n", menu.showMenu());
     }
 
 
@@ -26,20 +26,10 @@ public class MenuTest {
     public void shouldFalseWhenMenuOptionIsInvalid(){
         Menu menu = new Menu();
         menu.showMenu();
-        menu.setSelectedId(3);
+        menu.setSelectedId(33);
 
         assertEquals(false, menu.isSelectedIdValid());
     }
-
-    @Test
-    public void shouldShowErrorMsgWhenMenuOptionIsInvalid(){
-        Menu menu = new Menu();
-        menu.showMenu();
-        menu.setSelectedId(3);
-
-        assertEquals("Please select a valid option!", menu.showMsgInvalidSelectedOption());
-    }
-
 
     @Test
     public void shouldShowErrorWhenSelectedOptionIsString(){
@@ -74,6 +64,15 @@ public class MenuTest {
         menu.setPredefinedMenu();
 
         assertEquals(true,menu.isMenuInputOK("2"));
+
+    }
+
+    @Test
+    public void shouldReturnTrueWhenSelectedOptionValid3(){
+        Menu menu = new Menu();
+        menu.setPredefinedMenu();
+
+        assertEquals(true,menu.isMenuInputOK("3"));
 
     }
 
