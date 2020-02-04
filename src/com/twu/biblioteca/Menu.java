@@ -16,13 +16,10 @@ public class Menu {
     public void setPredefinedMenu(){
 
         itemList = new ArrayList<MenuItem>();
-        itemList.add(new MenuItem(1, "Quit App"));
-        itemList.add(new MenuItem(2, "List of books"));
-        itemList.add(new MenuItem(3, "Return a book"));
-
+            for(MenuEnum menuEnum : MenuEnum.values()){
+                itemList.add(new MenuItem(menuEnum.getId(), menuEnum.getTitle()));
+            }
     }
-
-
 
     public String showMenu(){
      String menuList = "";

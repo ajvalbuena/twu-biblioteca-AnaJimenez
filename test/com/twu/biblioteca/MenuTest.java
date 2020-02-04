@@ -9,9 +9,9 @@ public class MenuTest {
     public void shouldShowMenuItem(){
         Menu menu = new Menu();
 
-        assertEquals("1-Quit App\n2-List of books\n3-Return a book\n", menu.showMenu());
+        assertEquals("1-Quit App\n2-List of available books\n3-Return a book\n4-List of available movies\n",
+                menu.showMenu());
     }
-
 
     @Test
     public void shouldOKWhenMenuOptionIsValid(){
@@ -73,6 +73,15 @@ public class MenuTest {
         menu.setPredefinedMenu();
 
         assertEquals(true,menu.isMenuInputOK("3"));
+
+    }
+
+    @Test
+    public void shouldReturnTrueWhenSelectedOptionValid4(){
+        Menu menu = new Menu();
+        menu.setPredefinedMenu();
+
+        assertEquals(true,menu.isMenuInputOK("4"));
 
     }
 

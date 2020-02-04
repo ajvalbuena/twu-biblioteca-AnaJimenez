@@ -8,6 +8,12 @@ import java.io.InputStream;
 import static org.junit.Assert.assertEquals;
 
 public class BibliotecaTest {
+    public static final String confirmationMsgWhenBookIsCheckedOut = "Thank you! Enjoy the book";
+    public static final String errorMsgWhenBookIsNotCheckedOut = "Sorry, that book is not available";
+    public static final String confirmationMsgWhenMovieIsCheckedOut = "Thank you! Enjoy the movie";
+    public static final String errorMsgWhenMovieIsNotCheckedOut = "Sorry, that movie is not available";
+    public static final String confirmationMsgWhenBookIsReturned = "Thank you for returning the book";
+    public static final String errorMsgWhenBookIsNotReturned = "That is not a valid book return";
 
     @Test
     public void shouldShowWelcomeMsg() {
@@ -19,7 +25,7 @@ public class BibliotecaTest {
 
 
     @Test
-    public void shouldContinueWithMenuWhenOptionIs2 (){
+    public void shouldContinueWithMenuWhenOptionIs2() {
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         Menu menu = new Menu();
@@ -30,7 +36,7 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldContinueWithMenuWhenOptionIs3 (){
+    public void shouldContinueWithMenuWhenOptionIs3() {
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         Menu menu = new Menu();
@@ -41,50 +47,62 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldQuitWhenOptionIs1 (){
+    public void shouldContinueWithMenuWhenOptionIs4() {
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         Menu menu = new Menu();
         Library library = new Library();
 
-        assertEquals(false, bibliotecaApp.continueWithMenu("1", menu, library,bibliotecaApp));
+        assertEquals(true,
+                bibliotecaApp.continueWithMenu("4", menu, library, bibliotecaApp));
     }
 
     @Test
-    public void shouldContinueWithMenuWhenOptionIs6 (){
+    public void shouldQuitWhenOptionIs1() {
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         Menu menu = new Menu();
         Library library = new Library();
 
-        assertEquals(true, bibliotecaApp.continueWithMenu("6", menu, library,bibliotecaApp));
+        assertEquals(false, bibliotecaApp.continueWithMenu("1", menu, library, bibliotecaApp));
     }
 
     @Test
-    public void shouldContinueWithMenuInputIsNotInt (){
+    public void shouldContinueWithMenuWhenOptionIs6() {
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         Menu menu = new Menu();
         Library library = new Library();
 
-        assertEquals(true, bibliotecaApp.continueWithMenu("hi", menu, library,bibliotecaApp));
+        assertEquals(true, bibliotecaApp.continueWithMenu("6", menu, library, bibliotecaApp));
+    }
+
+    @Test
+    public void shouldContinueWithMenuInputIsNotInt() {
+
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        Menu menu = new Menu();
+        Library library = new Library();
+
+        assertEquals(true, bibliotecaApp.continueWithMenu("hi", menu, library, bibliotecaApp));
     }
 
 
     @Test
-    public void shouldShowErrorMesgWhenIsAnInvalidOptionInMenu(){
+    public void shouldShowErrorMesgWhenIsAnInvalidOptionInMenu() {
 
         Menu menu = new Menu();
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         Library library = new Library();
 
-        assertEquals("Please select a valid option!", bibliotecaApp.controlAccessMenuOptions(menu, library,"hola"));
+        assertEquals("Please select a valid option!",
+                bibliotecaApp.controlAccessMenuOptions(menu, library, "hola"));
 
     }
 
 
     @Test
-    public void shouldCheckOutABookWhenIdCorrectAndBookIsFree(){
+    public void shouldCheckOutABookWhenIdCorrectAndBookIsFree() {
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -99,7 +117,7 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldShowConfirmationMsgWhenBookIsCheckedOut(){
+    public void shouldShowConfirmationMsgWhenBookIsCheckedOut() {
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -108,14 +126,14 @@ public class BibliotecaTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-
-        assertEquals(library.confirmationMsgWhenBookIsCheckedOut, bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
+        assertEquals(confirmationMsgWhenBookIsCheckedOut,
+                bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
 
     }
 
 
     @Test
-    public void shouldShowErrorMsgWhenBookIsNotCheckedOutInvalidId(){
+    public void shouldShowErrorMsgWhenBookIsNotCheckedOutInvalidId() {
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -124,13 +142,13 @@ public class BibliotecaTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-
-        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
+        assertEquals(errorMsgWhenBookIsNotCheckedOut,
+                bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
 
     }
 
     @Test
-    public void shouldShowErrorMsgWhenBookIsNotCheckedOutInvalidInput(){
+    public void shouldShowErrorMsgWhenBookIsNotCheckedOutInvalidInput() {
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -139,13 +157,13 @@ public class BibliotecaTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-
-        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
+        assertEquals(errorMsgWhenBookIsNotCheckedOut,
+                bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
 
     }
 
     @Test
-    public void shouldShowErrorMsgWhenBookIsAlreadyCheckedOut(){
+    public void shouldShowErrorMsgWhenBookIsAlreadyCheckedOut() {
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -155,14 +173,14 @@ public class BibliotecaTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-
-        assertEquals(library.errorMsgWhenBookIsNotCheckedOut, bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
+        assertEquals(errorMsgWhenBookIsNotCheckedOut,
+                bibliotecaApp.controlAccessMenuOptions(menu, library, "2"));
 
     }
 
 
     @Test
-    public void shouldReturnABookWhenIdCorrectAndBookIsNotFree(){
+    public void shouldReturnABookWhenIdCorrectAndBookIsNotFree() {
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -177,24 +195,23 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldShowConfirmationMsgWhenBookIsReturned(){
+    public void shouldShowConfirmationMsgWhenBookIsReturned() {
 
         Menu menu = new Menu();
         Library library = new Library();
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
-        library.checkOutBookId(1);
+        library.checkOutLibraryElement("1", MenuEnum.getMenuEnumById(3));
         String input = "1";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-
-        assertEquals(library.confirmationMsgWhenBookIsReturned,
+        assertEquals(confirmationMsgWhenBookIsReturned,
                 bibliotecaApp.controlAccessMenuOptions(menu, library, "3"));
 
     }
 
     @Test
-    public void shouldShowErrorMsgWhenBookIsNotReturnedInvalidId(){
+    public void shouldShowErrorMsgWhenBookIsNotReturnedInvalidId() {
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -203,14 +220,13 @@ public class BibliotecaTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-
-        assertEquals(library.errorMsgWhenBookIsNotReturned,
+        assertEquals(errorMsgWhenBookIsNotReturned,
                 bibliotecaApp.controlAccessMenuOptions(menu, library, "3"));
 
     }
 
     @Test
-    public void shouldShowErrorMsgWhenBookIsNotReturnedInvalidInput(){
+    public void shouldShowErrorMsgWhenBookIsNotReturnedInvalidInput() {
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -219,14 +235,13 @@ public class BibliotecaTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-
-        assertEquals(library.errorMsgWhenBookIsNotReturned,
+        assertEquals(errorMsgWhenBookIsNotReturned,
                 bibliotecaApp.controlAccessMenuOptions(menu, library, "3"));
 
     }
 
     @Test
-    public void shouldShowErrorMsgWhenBookIsAlreadyFree(){
+    public void shouldShowErrorMsgWhenBookIsAlreadyFree() {
 
         Menu menu = new Menu();
         Library library = new Library();
@@ -235,9 +250,19 @@ public class BibliotecaTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-
-        assertEquals(library.errorMsgWhenBookIsNotReturned,
+        assertEquals(errorMsgWhenBookIsNotReturned,
                 bibliotecaApp.controlAccessMenuOptions(menu, library, "3"));
+    }
+
+    @Test
+    public void shouldShowErrorMsgWhenListOfMoviesisSelected() {
+
+        Menu menu = new Menu();
+        Library library = new Library();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+
+        assertEquals("Please select a valid option!",
+                bibliotecaApp.controlAccessMenuOptions(menu, library, "44"));
 
     }
 
