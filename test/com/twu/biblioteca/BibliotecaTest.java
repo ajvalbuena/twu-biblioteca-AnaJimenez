@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -266,4 +268,29 @@ public class BibliotecaTest {
 
     }
 
+    @Test
+    public void shouldReturnTrueWhenUserAndPasswordAreCorrect(){
+
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        Library library = new Library();
+        String input = "123-1234\npassword1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        assertEquals(true, bibliotecaApp.controlAccessApp(library) );
+
+    }
+
+    @Test
+    public void shouldReturnFalseWhenUserAndPasswordAreIncorrect(){
+
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        Library library = new Library();
+        String input = "123\npassw";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        assertEquals(false, bibliotecaApp.controlAccessApp(library) );
+
+    }
 }

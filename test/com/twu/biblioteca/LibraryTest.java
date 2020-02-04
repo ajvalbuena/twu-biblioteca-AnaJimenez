@@ -2,6 +2,10 @@ package com.twu.biblioteca;
 
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -380,4 +384,34 @@ public class LibraryTest {
                 library.returnLibraryElement("1", MenuEnum.MENU_MOVIE_RETURN));
 
     }
+
+    // Control Access user
+
+    @Test
+    public void shouldLoginARegisteredUser(){
+        Library library = new Library();
+
+        assertEquals(true, library.userLogin("123-1234", "password1"));
+
+    }
+
+    @Test
+    public void shouldNotLoginARegisteredUserDoesNotExist(){
+        Library library = new Library();
+
+        assertEquals(false, library.userLogin("123-123", "password1"));
+
+    }
+
+    @Test
+    public void shouldNotLoginARegisteredUserIncorrectPassword(){
+        Library library = new Library();
+
+        assertEquals(false, library.userLogin("123-1234", "passwor"));
+
+    }
+
+
+
+
 }

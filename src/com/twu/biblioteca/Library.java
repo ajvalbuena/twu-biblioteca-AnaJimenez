@@ -7,10 +7,12 @@ import java.util.Optional;
 public class Library {
     private List<Book> bookList;
     private List<Movie> movieList;
+    private List<User> userList;
 
 public Library(){
     this.setPredefinedBookList();
     this.setPredefinedMovieList();
+    this.setPredefinedUserList();
 }
 
     private void setPredefinedBookList(){
@@ -30,6 +32,12 @@ public Library(){
         this.movieList.add(new Movie(3, "Pride & Prejudice", "Joe Wright", "2005", "9.5"));
         this.movieList.add(new Movie(4, "The Illusionist", "Neil Burger", "2006"));
 
+    }
+
+    private  void setPredefinedUserList(){
+        this.userList = new ArrayList<User>();
+        this.userList.add(new User("123-1234", "password1"));
+        this.userList.add(new User("123-1235", "password2"));
     }
 
     public String showAvailableBookListBasicData() {
@@ -85,6 +93,12 @@ public Library(){
         return null;
     }
 
+    public User getUserByLibraryNumber(String libraryNumber){
+        for(User user: this.userList){
+            if(user.getLibraryNumber().equals(libraryNumber)) return user;
+        }
+        return null;
+    }
 
     public LibraryElement getLibraryElementById(Integer id, MenuEnum menuSelectedOption){
 
@@ -158,7 +172,16 @@ public Library(){
         } return menuSelectedOption.getErrorMsg();
     }
 
+    public boolean userLogin(String libraryNumber, String password){
 
+        User userDB = getUserByLibraryNumber(libraryNumber);
+        if(userDB!=null)
+             if(password.equals(userDB.getPassword())) return true;
+
+         return false;
+    }
+
+//    ---------------------------------
     public List<Movie> getMovieList() {
         return movieList;
     }

@@ -11,6 +11,10 @@ public class BibliotecaApp {
         Menu menu = new Menu();
 
         System.out.println(bibliotecaApp.showWelcomeMsg());
+       if(! bibliotecaApp.controlAccessApp(library)) {
+           System.out.println("Access denied");
+           System.exit(0);
+       }
 
         System.out.println(menu.showMenu());
 
@@ -25,6 +29,15 @@ public class BibliotecaApp {
         }
     }
 
+    public boolean controlAccessApp(Library library){
+        Scanner scanner = new Scanner( System. in);
+        System.out.println("Write your library number");
+        String inputString = scanner.nextLine();
+        System.out.println("Write your password");
+        String inputString2 = scanner.nextLine();
+
+        return library.userLogin(inputString,inputString2);
+    }
 
     public String showWelcomeMsg(){
         return "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
