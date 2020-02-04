@@ -11,8 +11,11 @@ public class LibraryTest {
     public static final String errorMsgWhenBookIsNotCheckedOut = "Sorry, that book is not available";
     public static final String confirmationMsgWhenMovieIsCheckedOut = "Thank you! Enjoy the movie";
     public static final String errorMsgWhenMovieIsNotCheckedOut = "Sorry, that movie is not available";
+
     public static final String confirmationMsgWhenBookIsReturned = "Thank you for returning the book";
     public static final String errorMsgWhenBookIsNotReturned = "That is not a valid book return";
+    public static final String confirmationMsgWhenMovieIsReturned = "Thank you for returning the movie";
+    public static final String errorMsgWhenMovieIsNotReturned = "That is not a valid movie return";
 
     @Test
     public void shouldShowListWithOnlyAvailableBooks(){
@@ -256,7 +259,7 @@ public class LibraryTest {
 
     }
 
-//    Return tests
+//    Return book tests
 
     @Test
     public void shouldReturnABookWhenIdCorrectAndBookIsNotFree(){
@@ -317,6 +320,64 @@ public class LibraryTest {
         Library library = new Library();
 
         assertEquals(errorMsgWhenBookIsNotReturned, library.returnLibraryElement("1", MenuEnum.MENU_BOOK_RETURN));
+
+    }
+
+    //    Return movie tests
+
+    @Test
+    public void shouldReturnAMovieWhenIdCorrectAndMovieIsNotFree(){
+        Library library = new Library();
+        library.checkOutLibraryElement("1", MenuEnum.MENU_MOVIE_LIST);
+        library.returnLibraryElement("1", MenuEnum.MENU_MOVIE_RETURN);
+
+        assertEquals(true, library.getMovieById(1).isFree());
+
+    }
+
+    @Test
+    public void shouldNotReturnAMovieWhenIdCorrectAndMovieIsFree(){
+        Library library = new Library();
+        library.returnLibraryElement("1", MenuEnum.MENU_MOVIE_RETURN);
+
+        assertEquals(true, library.getMovieById(1).isFree());
+
+    }
+
+    @Test
+    public void shouldShowCorrectMsgWhenMovieReturnedIsSuccessful(){
+        Library library = new Library();
+        library.checkOutLibraryElement("1", MenuEnum.MENU_MOVIE_LIST);
+
+        assertEquals(confirmationMsgWhenMovieIsReturned,
+                library.returnLibraryElement("1", MenuEnum.MENU_MOVIE_RETURN));
+
+    }
+
+    @Test
+    public void shouldShowErrMsgWhenMovieReturnIsAString(){
+        Library library = new Library();
+
+        assertEquals(errorMsgWhenMovieIsNotReturned,
+                library.returnLibraryElement("her", MenuEnum.MENU_MOVIE_RETURN));
+
+    }
+
+    @Test
+    public void shouldShowErrMsgWhenMovieReturnInputIsInvalidId(){
+        Library library = new Library();
+
+        assertEquals(errorMsgWhenMovieIsNotReturned,
+                library.returnLibraryElement("5", MenuEnum.MENU_MOVIE_RETURN));
+
+    }
+
+    @Test
+    public void shouldShowErrMsgWhenReturnInputIsIdOfAnAvailableMovie(){
+        Library library = new Library();
+
+        assertEquals(errorMsgWhenMovieIsNotReturned,
+                library.returnLibraryElement("1", MenuEnum.MENU_MOVIE_RETURN));
 
     }
 }

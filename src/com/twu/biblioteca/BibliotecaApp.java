@@ -56,26 +56,20 @@ public class BibliotecaApp {
             switch (menuSelectedOption){
 
                 case MENU_BOOK_LIST:
-                    System.out.println(library.showAvailableBookListBasicData());
-
-                    Scanner scannerCheckOut = new Scanner( System. in);
-                    String inputIdCheckOut = scannerCheckOut.nextLine();
-
-                    return library.checkOutLibraryElement(inputIdCheckOut, menuSelectedOption );
-
-                case MENU_BOOK_RETURN:
-                    Scanner scannerReturn = new Scanner( System. in);
-                    String inputIdReturn = scannerReturn.nextLine();
-
-                    return library.returnLibraryElement(inputIdReturn, menuSelectedOption );
-
                 case MENU_MOVIE_LIST:
-                    System.out.println(library.showAvailableMovieListBasicData());
+                    System.out.println(library.showAvailableLibraryElements(menuSelectedOption));
 
                     Scanner scannerCheckOutM = new Scanner( System. in);
                     String inputIdCheckOutM = scannerCheckOutM.nextLine();
 
                     return library.checkOutLibraryElement(inputIdCheckOutM, menuSelectedOption );
+
+                case MENU_BOOK_RETURN:
+                case MENU_MOVIE_RETURN:
+                    Scanner scannerReturn = new Scanner( System. in);
+                    String inputIdReturn = scannerReturn.nextLine();
+
+                    return library.returnLibraryElement(inputIdReturn, menuSelectedOption );
 
                 default:
                     return menu.showMsgInvalidSelectedOption();

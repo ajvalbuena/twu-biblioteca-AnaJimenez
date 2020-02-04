@@ -255,7 +255,7 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldShowErrorMsgWhenListOfMoviesisSelected() {
+    public void shouldShowErrorMsgWhenListOfMoviesIsSelected() {
 
         Menu menu = new Menu();
         Library library = new Library();

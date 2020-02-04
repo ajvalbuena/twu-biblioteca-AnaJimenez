@@ -57,6 +57,19 @@ public Library(){
         return listOfMovies;
     }
 
+    public String showAvailableLibraryElements (MenuEnum menuSelectedOption){
+        switch (menuSelectedOption){
+            case MENU_BOOK_LIST:
+                return showAvailableBookListBasicData();
+
+            case MENU_MOVIE_LIST:
+                return showAvailableMovieListBasicData();
+
+            default:
+                return "";
+        }
+    }
+
 
     public Book getBookById(Integer id){
         for(Book book: this.bookList){
@@ -75,17 +88,18 @@ public Library(){
 
     public LibraryElement getLibraryElementById(Integer id, MenuEnum menuSelectedOption){
 
-    switch (menuSelectedOption){
-        case MENU_BOOK_LIST:
-        case MENU_BOOK_RETURN:
-            return getBookById(id);
+        switch (menuSelectedOption){
+            case MENU_BOOK_LIST:
+            case MENU_BOOK_RETURN:
+                return getBookById(id);
 
-        case MENU_MOVIE_LIST:
-            return getMovieById(id);
+            case MENU_MOVIE_LIST:
+            case MENU_MOVIE_RETURN:
+                return getMovieById(id);
 
-        default:
-            return null;
-    }
+            default:
+                return null;
+        }
     }
 
 
