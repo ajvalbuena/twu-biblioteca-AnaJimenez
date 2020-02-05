@@ -358,7 +358,8 @@ public class BibliotecaTest {
         Library library = this.setUpUserInLibrary();
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
 
-        String userInfo = "Pepe Gracia\tpepe@gmail.com\t678543216\t123-1234\n";
+        String userInfo = "Name\tEmail\tPhone number\tLibrary Number\n"
+        +"Pepe Gracia\tpepe@gmail.com\t678543216\t123-1234\n";
         assertEquals(userInfo, bibliotecaApp.showUsersInfo(library.getUserLogged()));
 
     }
@@ -371,7 +372,8 @@ public class BibliotecaTest {
         library.setUserLogged(new User("000-0000", "librarian", RolEnum.ROL_ADMIN,
                 "Master librarian", "admin@gmail.com", "000543216"));
 
-        String userInfo = "Pepe Gracia\tpepe@gmail.com\t678543216\t123-1234\n"
+        String userInfo = "Name\tEmail\tPhone number\tLibrary Number\n"
+                +"Pepe Gracia\tpepe@gmail.com\t678543216\t123-1234\n"
                 + "Ana Garcia\ta@gmail.com\t987654321\t123-1235\n"
                 +"Master librarian\tadmin@gmail.com\t000543216\t000-0000\n";
         assertEquals(userInfo, bibliotecaApp.showUsersInfo(library.getUserLogged()));

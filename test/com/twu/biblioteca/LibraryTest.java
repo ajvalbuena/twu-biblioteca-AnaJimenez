@@ -34,7 +34,8 @@ public class LibraryTest {
         Library library = new Library();
         library.getBookList().get(0).setUserNumber("123-1234");
 
-        assertEquals("2\tHarry Potter and the Philosopher's Stone\tJ. K. Rowling\t1997".concat("\n") +
+        assertEquals("Id\tTitle\tAuthor\tYear\n"+
+                "2\tHarry Potter and the Philosopher's Stone\tJ. K. Rowling\t1997".concat("\n") +
                 "3\tLittle Women\tLouisa May Alcott\t1868".concat("\n"), library.showAvailableBookListBasicData());
     }
 
@@ -44,7 +45,8 @@ public class LibraryTest {
         library.getMovieList().get(0).setUserNumber("123-1234");
         library.getMovieList().get(1).setUserNumber("123-1234");
 
-        assertEquals("3\tPride & Prejudice\t2005\tJoe Wright\t9.5".concat("\n") +
+        assertEquals("Id\tTitle\tYear\tDirector\tRating\n"+
+                "3\tPride & Prejudice\t2005\tJoe Wright\t9.5".concat("\n") +
                 "4\tThe Illusionist\t2006\tNeil Burger\t".concat("\n"), library.showAvailableMovieListBasicData());
     }
 
@@ -385,7 +387,34 @@ public class LibraryTest {
 
     }
 
-    // Control Access user
+
+//    @Test
+//    public void shouldShowListOfCheckedoutMoviesByUserWhenReturning(){
+//
+//        Library library = this.setUpUserInLibrary();
+//        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+//        library.checkOutLibraryElement("1",MenuEnum.MENU_MOVIE_CHECKED_OUT);
+//        library.checkOutLibraryElement("2",MenuEnum.MENU_MOVIE_CHECKED_OUT);
+//
+//        assertEquals("Id\tTitle\tYear\tDirector\tRating\n"+
+//                "3\tPride & Prejudice\t2005\tJoe Wright\t9.5".concat("\n") +
+//                "4\tThe Illusionist\t2006\tNeil Burger\t".concat("\n"), library.showCheckedOutMovieListByUser());
+//
+//    }
+//
+//
+//    @Test
+//    public void shouldShowListOfCheckedoutBooksByUserWhenReturning(){
+//
+//        Library library = this.setUpUserInLibrary();
+//        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+//        library.checkOutLibraryElement("1",MenuEnum.MENU_BOOKS_CHECKED_OUT);
+//
+//        assertEquals("Id\tTitle\tAuthor\tYear\n"+
+//                "2\tHarry Potter and the Philosopher's Stone\tJ. K. Rowling\t1997".concat("\n") +
+//                        "3\tLittle Women\tLouisa May Alcott\t1868".concat("\n"), library.showCheckedOutBooksListByUser());
+//
+//    }
 
 
 

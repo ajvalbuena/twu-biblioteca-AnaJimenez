@@ -37,7 +37,7 @@ public class Library {
 
 
     public String showAvailableBookListBasicData() {
-        String listOfBooks = "";
+        String listOfBooks = "Id\tTitle\tAuthor\tYear\n";
 
         for(Book book: this.bookList){
 
@@ -49,7 +49,7 @@ public class Library {
     }
 
     public String showAvailableMovieListBasicData() {
-        String listOfMovies = "";
+        String listOfMovies = "Id\tTitle\tYear\tDirector\tRating\n";
 
         for(Movie movie: this.movieList){
 
@@ -165,7 +165,8 @@ public class Library {
 
 
     public String showCheckedoutBookListBasicData() {
-        String listOfBooks = "";
+
+        String listOfBooks = "Id\tTitle\tAuthor\tYear\n";
 
         for(Book book: this.bookList){
 
@@ -178,7 +179,7 @@ public class Library {
     }
 
     public String showCheckedoutMovieListBasicData() {
-        String listOfMovies = "";
+        String listOfMovies = "Id\tTitle\tYear\tDirector\tRating\n";
 
         for(Movie movie: this.movieList){
 
@@ -194,15 +195,19 @@ public class Library {
     public String showCheckedoutLibraryElements (MenuEnum menuSelectedOption){
         switch (menuSelectedOption){
             case MENU_BOOKS_CHECKED_OUT:
+            case MENU_BOOK_RETURN:
                 return showCheckedoutBookListBasicData();
 
             case MENU_MOVIE_CHECKED_OUT:
+            case MENU_MOVIE_RETURN:
                 return showCheckedoutMovieListBasicData();
 
             default:
                 return "";
         }
     }
+
+
 
     //    ---------------------------------
     public List<Movie> getMovieList() {

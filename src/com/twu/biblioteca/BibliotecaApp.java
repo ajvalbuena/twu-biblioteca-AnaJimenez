@@ -90,6 +90,7 @@ public class BibliotecaApp {
                 case MENU_MOVIE_LIST:
                     System.out.println(library.showAvailableLibraryElements(menuSelectedOption));
 
+                    System.out.println("Insert the id of the element that you want to check out: ");
                     Scanner scannerCheckOutM = new Scanner( System. in);
                     String inputIdCheckOutM = scannerCheckOutM.nextLine();
 
@@ -97,6 +98,8 @@ public class BibliotecaApp {
 
                 case MENU_BOOK_RETURN:
                 case MENU_MOVIE_RETURN:
+                    System.out.println("Insert the id of the element that you want to return: ");
+                    System.out.println(library.showCheckedoutLibraryElements(menuSelectedOption));
                     Scanner scannerReturn = new Scanner( System. in);
                     String inputIdReturn = scannerReturn.nextLine();
 
@@ -140,7 +143,7 @@ public class BibliotecaApp {
 
 
     public String showUsersInfo(User userLogged) {
-        String listUserInfo="";
+        String listUserInfo="Name\tEmail\tPhone number\tLibrary Number\n";
         if(userLogged.getRol()==RolEnum.ROL_ADMIN){
             for(User user: this.userList){
                 listUserInfo+= user.showMyInfo();
@@ -148,7 +151,7 @@ public class BibliotecaApp {
             return listUserInfo;
         }
 
-        return userLogged.showMyInfo();
+        return listUserInfo + userLogged.showMyInfo();
     }
 
 
