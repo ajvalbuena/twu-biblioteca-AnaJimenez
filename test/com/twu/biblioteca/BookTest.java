@@ -9,7 +9,7 @@ public class BookTest {
     @Test
     public void shouldReturnNotFreeWhenBookIsCheckedOut(){
         Book book = new Book(1,"1984", "George Orwell", "1949");
-        book.setFree(false);
+        book.setUserNumber("123-1234");
         assertEquals(false, book.isFree());
     }
 

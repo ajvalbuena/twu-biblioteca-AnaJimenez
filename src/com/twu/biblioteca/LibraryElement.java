@@ -6,23 +6,21 @@ public class LibraryElement {
     private String title;
     private String creator;
     private String year;
-    private boolean free;
+    private String userNumber;
 
     public LibraryElement (Integer id, String title, String creator, String year){
         this.id = id;
         this.title = title;
         this.creator = creator;
         this.year = year;
-        this.free = true;
     }
 
-    public void checkOut(){
-        this.setFree(false);
+    public void checkOut(String userNumber){
+        this.setUserNumber(userNumber);
     }
 
     public void returnElement(){
-        this.setFree(true);
-
+        this.setUserNumber(null);
     }
 
     public Integer getId() {
@@ -58,10 +56,14 @@ public class LibraryElement {
     }
 
     public boolean isFree() {
-        return free;
+        return (this.userNumber == null) ? true : this.userNumber.isEmpty();
     }
 
-    public void setFree(boolean free) {
-        this.free = free;
+    public String getUserNumber() {
+        return userNumber;
+    }
+
+    public void setUserNumber(String userNumber) {
+        this.userNumber = userNumber;
     }
 }

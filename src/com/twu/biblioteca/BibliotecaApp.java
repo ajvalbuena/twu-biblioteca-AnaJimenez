@@ -1,22 +1,30 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class BibliotecaApp {
+
+    private List<User> userList;
+
+    public BibliotecaApp(){
+        this.setPredefinedUserList();
+    }
 
     public static void main(String[] args) {
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         Library library = new Library();
-        Menu menu = new Menu();
+
 
         System.out.println(bibliotecaApp.showWelcomeMsg());
        if(! bibliotecaApp.controlAccessApp(library)) {
            System.out.println("Access denied");
            System.exit(0);
        }
-
-        System.out.println(menu.showMenu());
+        Menu menu = new Menu();
+        System.out.println(menu.showMenu(library.getUserLogged().getRol()));
 
         Scanner scanner = new Scanner( System. in);
         String inputString = scanner.nextLine();
@@ -24,10 +32,20 @@ public class BibliotecaApp {
         while(bibliotecaApp.continueWithMenu(inputString, menu, library, bibliotecaApp)){
             System.out.println(bibliotecaApp.controlAccessMenuOptions(menu, library, inputString));
 
-            System.out.println(menu.showMenu());
+            System.out.println(menu.showMenu(library.getUserLogged().getRol()));
             inputString = scanner.nextLine();
         }
     }
+
+
+
+    private  void setPredefinedUserList(){
+        this.userList = new ArrayList<User>();
+        this.userList.add(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        this.userList.add(new User("123-1235", "password2", RolEnum.ROL_BASIC));
+        this.userList.add(new User("000-0000", "librarian", RolEnum.ROL_ADMIN));
+    }
+
 
     public boolean controlAccessApp(Library library){
         Scanner scanner = new Scanner( System. in);
@@ -36,7 +54,7 @@ public class BibliotecaApp {
         System.out.println("Write your password");
         String inputString2 = scanner.nextLine();
 
-        return library.userLogin(inputString,inputString2);
+        return this.userLogin(inputString,inputString2, library);
     }
 
     public String showWelcomeMsg(){
@@ -84,6 +102,10 @@ public class BibliotecaApp {
 
                     return library.returnLibraryElement(inputIdReturn, menuSelectedOption );
 
+                case MENU_BOOKS_CHECKED_OUT:
+                case MENU_MOVIE_CHECKED_OUT:
+                    return library.showCheckedoutLibraryElements(menuSelectedOption);
+
                 default:
                     return menu.showMsgInvalidSelectedOption();
 
@@ -92,5 +114,30 @@ public class BibliotecaApp {
 
         }
     }
+
+
+    public User getUserByLibraryNumber(String libraryNumber){
+        for(User user: this.userList){
+            if(user.getLibraryNumber().equals(libraryNumber)) return user;
+        }
+        return null;
+    }
+
+    public boolean userLogin(String libraryNumber, String password, Library library){
+
+        User userDB = getUserByLibraryNumber(libraryNumber);
+        if(userDB!=null)
+            if(password.equals(userDB.getPassword())) {
+                library.setUserLogged(userDB);
+                return true;
+            }
+
+        return false;
+    }
+
+    public  List<User> getUserList() {
+        return userList;
+    }
+
 }
 

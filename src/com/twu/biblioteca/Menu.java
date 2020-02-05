@@ -17,17 +17,21 @@ public class Menu {
 
         itemList = new ArrayList<MenuItem>();
             for(MenuEnum menuEnum : MenuEnum.values()){
-                itemList.add(new MenuItem(menuEnum.getId(), menuEnum.getTitle()));
+                itemList.add(new MenuItem(menuEnum.getId(), menuEnum.getTitle(), menuEnum.getShowAllUsers()));
             }
     }
 
-    public String showMenu(){
-     String menuList = "";
+    public String showMenu(RolEnum rol){
+        String menuList = "";
 
-    for (MenuItem item: itemList)
-          menuList+= item.getId().toString()+ "-" +item.getOption()+'\n';
-
-    return menuList;
+        for (MenuItem item: itemList)
+              if(rol == RolEnum.ROL_ADMIN )
+                  menuList+= item.getId().toString()+ "-" +item.getOption()+'\n';
+              else {
+                  if(item.isShowAllUsers())
+                      menuList+= item.getId().toString()+ "-" +item.getOption()+'\n';
+              }
+        return menuList;
  }
 
 

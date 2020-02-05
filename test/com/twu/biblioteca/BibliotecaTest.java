@@ -59,6 +59,7 @@ public class BibliotecaTest {
                 bibliotecaApp.continueWithMenu("4", menu, library, bibliotecaApp));
     }
 
+
     @Test
     public void shouldQuitWhenOptionIs1() {
 
@@ -109,6 +110,7 @@ public class BibliotecaTest {
         Menu menu = new Menu();
         Library library = new Library();
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
         String input = "1";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -123,6 +125,7 @@ public class BibliotecaTest {
 
         Menu menu = new Menu();
         Library library = new Library();
+        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         String input = "1";
         InputStream in = new ByteArrayInputStream(input.getBytes());
@@ -169,7 +172,7 @@ public class BibliotecaTest {
 
         Menu menu = new Menu();
         Library library = new Library();
-        library.getBookById(2).setFree(false);
+        library.getBookById(2).setUserNumber("123-1234");
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         String input = "2";
         InputStream in = new ByteArrayInputStream(input.getBytes());
@@ -202,6 +205,7 @@ public class BibliotecaTest {
         Menu menu = new Menu();
         Library library = new Library();
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
         library.checkOutLibraryElement("1", MenuEnum.getMenuEnumById(3));
         String input = "1";
         InputStream in = new ByteArrayInputStream(input.getBytes());
@@ -268,6 +272,34 @@ public class BibliotecaTest {
 
     }
 
+
+    @Test
+    public void shouldLoginARegisteredUser(){
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        Library library = new Library();
+
+        assertEquals(true, bibliotecaApp.userLogin("123-1234", "password1", library));
+
+    }
+
+    @Test
+    public void shouldNotLoginARegisteredUserDoesNotExist(){
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        Library library = new Library();
+
+        assertEquals(false, bibliotecaApp.userLogin("123-123", "password1",library) );
+
+    }
+
+    @Test
+    public void shouldNotLoginARegisteredUserIncorrectPassword(){
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        Library library = new Library();
+
+        assertEquals(false, bibliotecaApp.userLogin("123-1234", "passwor", library));
+
+    }
+
     @Test
     public void shouldReturnTrueWhenUserAndPasswordAreCorrect(){
 
@@ -293,4 +325,24 @@ public class BibliotecaTest {
         assertEquals(false, bibliotecaApp.controlAccessApp(library) );
 
     }
+
+    @Test
+    public void shouldShowNumberOfUserInBookWhenCheckout(){
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        User user = bibliotecaApp.getUserList().get(0);
+        Library library = new Library();
+
+        String input = "123-1234\npassword1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        bibliotecaApp.controlAccessApp(library);
+        library.checkOutLibraryElement("1", MenuEnum.MENU_BOOK_LIST);
+
+
+        assertEquals(user.getLibraryNumber(),
+                library.getLibraryElementById(1,MenuEnum.MENU_BOOK_LIST).getUserNumber()) ;
+
+    }
+
 }

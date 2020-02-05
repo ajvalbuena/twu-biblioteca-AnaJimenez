@@ -7,13 +7,13 @@ import java.util.Optional;
 public class Library {
     private List<Book> bookList;
     private List<Movie> movieList;
-    private List<User> userList;
+    private User userLogged;
 
-public Library(){
-    this.setPredefinedBookList();
-    this.setPredefinedMovieList();
-    this.setPredefinedUserList();
-}
+
+    public Library(){
+        this.setPredefinedBookList();
+        this.setPredefinedMovieList();
+    }
 
     private void setPredefinedBookList(){
 
@@ -34,11 +34,7 @@ public Library(){
 
     }
 
-    private  void setPredefinedUserList(){
-        this.userList = new ArrayList<User>();
-        this.userList.add(new User("123-1234", "password1"));
-        this.userList.add(new User("123-1235", "password2"));
-    }
+
 
     public String showAvailableBookListBasicData() {
         String listOfBooks = "";
@@ -93,12 +89,7 @@ public Library(){
         return null;
     }
 
-    public User getUserByLibraryNumber(String libraryNumber){
-        for(User user: this.userList){
-            if(user.getLibraryNumber().equals(libraryNumber)) return user;
-        }
-        return null;
-    }
+
 
     public LibraryElement getLibraryElementById(Integer id, MenuEnum menuSelectedOption){
 
@@ -155,7 +146,7 @@ public Library(){
         LibraryElement element = this.getFreeLibraryElementForCheckOut(inputString, menuSelectedOption);
 
         if(element!=null) {
-            element.checkOut();
+            element.checkOut(this.userLogged.getLibraryNumber());
             return menuSelectedOption.getSuccessfulMsg();
         }
         return  menuSelectedOption.getErrorMsg();
@@ -172,16 +163,48 @@ public Library(){
         } return menuSelectedOption.getErrorMsg();
     }
 
-    public boolean userLogin(String libraryNumber, String password){
 
-        User userDB = getUserByLibraryNumber(libraryNumber);
-        if(userDB!=null)
-             if(password.equals(userDB.getPassword())) return true;
+    public String showCheckedoutBookListBasicData() {
+        String listOfBooks = "";
 
-         return false;
+        for(Book book: this.bookList){
+
+            if(!book.isFree()){
+                listOfBooks+=book.getId().toString().concat("\t") + book.getTitle().concat("\t") +
+                        book.getCreator().concat("\t") + book.getYear().concat("\t")
+                        + book.getUserNumber().concat("\n");}
+        }
+        return listOfBooks;
     }
 
-//    ---------------------------------
+    public String showCheckedoutMovieListBasicData() {
+        String listOfMovies = "";
+
+        for(Movie movie: this.movieList){
+
+            if(!movie.isFree()){
+                listOfMovies+=movie.getId().toString().concat("\t") + movie.getTitle().concat("\t")
+                        + movie.getYear().concat("\t") + movie.getCreator().concat("\t")
+                        + Optional.ofNullable(movie.getRating()).orElse("").concat("\t")
+                        + movie.getUserNumber().concat("\n");}
+        }
+        return listOfMovies;
+    }
+
+    public String showCheckedoutLibraryElements (MenuEnum menuSelectedOption){
+        switch (menuSelectedOption){
+            case MENU_BOOKS_CHECKED_OUT:
+                return showCheckedoutBookListBasicData();
+
+            case MENU_MOVIE_CHECKED_OUT:
+                return showCheckedoutMovieListBasicData();
+
+            default:
+                return "";
+        }
+    }
+
+    //    ---------------------------------
     public List<Movie> getMovieList() {
         return movieList;
     }
@@ -198,5 +221,11 @@ public Library(){
         this.bookList = bookList;
     }
 
+    public User getUserLogged() {
+        return userLogged;
+    }
 
+    public void setUserLogged(User userLogged) {
+        this.userLogged = userLogged;
+    }
 }

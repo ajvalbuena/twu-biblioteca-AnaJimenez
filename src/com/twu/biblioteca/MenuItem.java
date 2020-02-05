@@ -1,13 +1,15 @@
 package com.twu.biblioteca;
 
 public class MenuItem {
-    private String option;
-    private Integer id;
 
-    public MenuItem(int id, String option) {
+    private Integer id;
+    private String option;
+    private boolean showAllUsers;
+
+    public MenuItem(int id, String option, boolean showAllUsers) {
         this.id = id;
         this.option = option;
-
+        this.showAllUsers = showAllUsers;
     }
 
     public Integer getId() {
@@ -24,5 +26,13 @@ public class MenuItem {
 
     public void setOption(String option) {
         this.option = option;
+    }
+
+    public boolean isShowAllUsers() {
+        return showAllUsers;
+    }
+
+    public void setShowAllUsers(boolean showAllUsers) {
+        this.showAllUsers = showAllUsers;
     }
 }
