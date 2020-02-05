@@ -41,9 +41,9 @@ public class BibliotecaApp {
 
     private  void setPredefinedUserList(){
         this.userList = new ArrayList<User>();
-        this.userList.add(new User("123-1234", "password1", RolEnum.ROL_BASIC));
-        this.userList.add(new User("123-1235", "password2", RolEnum.ROL_BASIC));
-        this.userList.add(new User("000-0000", "librarian", RolEnum.ROL_ADMIN));
+        this.userList.add(new User("123-1234", "password1", RolEnum.ROL_BASIC, "Pepe Gracia", "pepe@gmail.com", "678543216"));
+        this.userList.add(new User("123-1235", "password2", RolEnum.ROL_BASIC, "Ana Garcia", "a@gmail.com", "987654321"));
+        this.userList.add(new User("000-0000", "librarian", RolEnum.ROL_ADMIN, "Master librarian", "admin@gmail.com", "000543216"));
     }
 
 
@@ -106,6 +106,9 @@ public class BibliotecaApp {
                 case MENU_MOVIE_CHECKED_OUT:
                     return library.showCheckedoutLibraryElements(menuSelectedOption);
 
+                case MENU_INFO:
+                    return this.showUsersInfo(library.getUserLogged());
+
                 default:
                     return menu.showMsgInvalidSelectedOption();
 
@@ -134,6 +137,21 @@ public class BibliotecaApp {
 
         return false;
     }
+
+
+    public String showUsersInfo(User userLogged) {
+        String listUserInfo="";
+        if(userLogged.getRol()==RolEnum.ROL_ADMIN){
+            for(User user: this.userList){
+                listUserInfo+= user.showMyInfo();
+            }
+            return listUserInfo;
+        }
+
+        return userLogged.showMyInfo();
+    }
+
+
 
     public  List<User> getUserList() {
         return userList;

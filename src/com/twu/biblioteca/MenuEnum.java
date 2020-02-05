@@ -7,8 +7,9 @@ public enum MenuEnum {
     MENU_BOOK_RETURN(3,"Return a book", "Thank you for returning the book", "That is not a valid book return", true),
     MENU_MOVIE_LIST(4,"List of available movies", "Thank you! Enjoy the movie", "Sorry, that movie is not available", true),
     MENU_MOVIE_RETURN(5,"Return a movie", "Thank you for returning the movie", "That is not a valid movie return", true),
-    MENU_BOOKS_CHECKED_OUT(6,"Librarian, you can view checked out books", "","", false),
-    MENU_MOVIE_CHECKED_OUT(7,"Librarian, you can view checked out movies", "","", false);
+    MENU_INFO(6,"Show User Information", "","", true),
+    MENU_BOOKS_CHECKED_OUT(7,"Librarian, you can view checked out books", "","", false),
+    MENU_MOVIE_CHECKED_OUT(8,"Librarian, you can view checked out movies", "","", false);
 
     private int id;
     private String title;

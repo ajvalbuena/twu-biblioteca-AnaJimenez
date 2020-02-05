@@ -21,6 +21,14 @@ public class LibraryTest {
     public static final String confirmationMsgWhenMovieIsReturned = "Thank you for returning the movie";
     public static final String errorMsgWhenMovieIsNotReturned = "That is not a valid movie return";
 
+
+    public Library setUpUserInLibrary(){
+        Library library = new Library();
+        library.setUserLogged(new User("123-1234", "password1",
+                RolEnum.ROL_BASIC,"Pepe Gracia", "pepe@gmail.com", "678543216"));
+        return library;
+    }
+
     @Test
     public void shouldShowListWithOnlyAvailableBooks(){
         Library library = new Library();
@@ -43,8 +51,7 @@ public class LibraryTest {
 
     @Test
     public void shouldReturnFalseWhenABookIsCheckedOut(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         library.checkOutLibraryElement("2",MenuEnum.MENU_BOOK_LIST);
 
         assertEquals(false, library.getBookById(2).isFree());
@@ -134,8 +141,7 @@ public class LibraryTest {
 
     @Test
     public void shouldCheckOutABookWhenIdCorrectAndBookIsFree(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         library.checkOutLibraryElement("1", MenuEnum.MENU_BOOK_LIST);
 
         assertEquals(false, library.getBookById(1).isFree());
@@ -144,8 +150,7 @@ public class LibraryTest {
 
     @Test
     public void shouldNotCheckOutABookWhenIdCorrectAndBookIsNotFree(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         library.getBookById(1).setUserNumber("123-1234");
         library.checkOutLibraryElement("1", MenuEnum.MENU_BOOK_LIST);
 
@@ -155,8 +160,7 @@ public class LibraryTest {
 
     @Test
     public void shouldNotCheckOutABookWhenIdNoCorrect(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         library.checkOutLibraryElement("fgdf1", MenuEnum.MENU_BOOK_LIST);
 
         assertEquals(true, library.getBookById(1).isFree());
@@ -166,8 +170,7 @@ public class LibraryTest {
 
     @Test
     public void shouldShowCorrectMsgWhenBookCheckOutIsSuccessful(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         assertEquals(confirmationMsgWhenBookIsCheckedOut,
                 library.checkOutLibraryElement("1", MenuEnum.MENU_BOOK_LIST));
 
@@ -175,8 +178,7 @@ public class LibraryTest {
 
     @Test
     public void shouldShowErrMsgWhenBookCheckoutInputIsAString(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
 
         assertEquals(errorMsgWhenBookIsNotCheckedOut, library.checkOutLibraryElement("her", MenuEnum.MENU_BOOK_LIST));
 
@@ -184,8 +186,7 @@ public class LibraryTest {
 
     @Test
     public void shouldShowErrMsgWhenBookCheckoutInputIsInvalidId(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
 
         assertEquals(errorMsgWhenBookIsNotCheckedOut, library.checkOutLibraryElement("5", MenuEnum.MENU_BOOK_LIST));
 
@@ -193,9 +194,8 @@ public class LibraryTest {
 
     @Test
     public void shouldShowErrMsgWhenCheckoutInputIsIdOfAnUnavailableBook(){
-        Library library = new Library();
+        Library library = this.setUpUserInLibrary();
         library.getBookById(1).setUserNumber("123-1234");
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
 
         assertEquals(errorMsgWhenBookIsNotCheckedOut, library.checkOutLibraryElement("1", MenuEnum.MENU_BOOK_LIST));
 
@@ -205,8 +205,7 @@ public class LibraryTest {
 
     @Test
     public void shouldCheckOutAMovieWhenIdCorrectAndBookIsFree(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         library.checkOutLibraryElement("1", MenuEnum.MENU_MOVIE_LIST);
 
         assertEquals(false, library.getMovieById(1).isFree());
@@ -215,9 +214,8 @@ public class LibraryTest {
 
     @Test
     public void shouldNotCheckOutAMovieWhenIdCorrectAndBookIsNotFree(){
-        Library library = new Library();
+        Library library = this.setUpUserInLibrary();
         library.getMovieById(1).setUserNumber("123-1234");
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
         library.checkOutLibraryElement("1",  MenuEnum.MENU_MOVIE_LIST);
 
         assertEquals(false, library.getMovieById(1).isFree());
@@ -226,8 +224,7 @@ public class LibraryTest {
 
     @Test
     public void shouldNotCheckOutAMovieWhenIdNoCorrect(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         library.checkOutLibraryElement("fgdf1",  MenuEnum.MENU_MOVIE_LIST);
 
         assertEquals(true, library.getMovieById(1).isFree());
@@ -237,8 +234,7 @@ public class LibraryTest {
 
     @Test
     public void shouldShowCorrectMsgWhenMovieCheckOutIsSuccessful(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
 
         assertEquals(confirmationMsgWhenMovieIsCheckedOut, library.checkOutLibraryElement("1", MenuEnum.MENU_MOVIE_LIST));
 
@@ -246,25 +242,22 @@ public class LibraryTest {
 
     @Test
     public void shouldShowErrMsgWhenMovieCheckoutInputIsAString(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         assertEquals(errorMsgWhenMovieIsNotCheckedOut, library.checkOutLibraryElement("her",  MenuEnum.MENU_MOVIE_LIST));
 
     }
 
     @Test
     public void shouldShowErrMsgWhenMovieCheckoutInputIsInvalidId(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         assertEquals(errorMsgWhenMovieIsNotCheckedOut, library.checkOutLibraryElement("5",  MenuEnum.MENU_MOVIE_LIST));
 
     }
 
     @Test
     public void shouldShowErrMsgWhenCheckoutInputIsIdOfAnUnavailableMovie(){
-        Library library = new Library();
+        Library library = this.setUpUserInLibrary();
         library.getMovieById(1).setUserNumber("123-1234");
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
         assertEquals(errorMsgWhenMovieIsNotCheckedOut, library.checkOutLibraryElement("1",  MenuEnum.MENU_MOVIE_LIST));
 
     }
@@ -303,8 +296,7 @@ public class LibraryTest {
 
     @Test
     public void shouldShowCorrectMsgWhenBookReturnedIsSuccessful(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         library.checkOutLibraryElement("1", MenuEnum.MENU_BOOK_LIST);
 
         assertEquals(confirmationMsgWhenBookIsReturned, library.returnLibraryElement("1", MenuEnum.MENU_BOOK_RETURN));
@@ -339,8 +331,7 @@ public class LibraryTest {
 
     @Test
     public void shouldReturnAMovieWhenIdCorrectAndMovieIsNotFree(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         library.checkOutLibraryElement("1", MenuEnum.MENU_MOVIE_LIST);
         library.returnLibraryElement("1", MenuEnum.MENU_MOVIE_RETURN);
 
@@ -359,8 +350,7 @@ public class LibraryTest {
 
     @Test
     public void shouldShowCorrectMsgWhenMovieReturnedIsSuccessful(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
         library.checkOutLibraryElement("1", MenuEnum.MENU_MOVIE_LIST);
 
         assertEquals(confirmationMsgWhenMovieIsReturned,
@@ -379,8 +369,7 @@ public class LibraryTest {
 
     @Test
     public void shouldShowErrMsgWhenMovieReturnInputIsInvalidId(){
-        Library library = new Library();
-        library.setUserLogged(new User("123-1234", "password1", RolEnum.ROL_BASIC));
+        Library library = this.setUpUserInLibrary();
 
         assertEquals(errorMsgWhenMovieIsNotReturned,
                 library.returnLibraryElement("5", MenuEnum.MENU_MOVIE_RETURN));

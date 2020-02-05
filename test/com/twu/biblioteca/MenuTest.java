@@ -9,7 +9,8 @@ public class MenuTest {
     public void shouldShowMenuItemWhenUser(){
         Menu menu = new Menu();
 
-        assertEquals("1-Quit App\n2-List of available books\n3-Return a book\n4-List of available movies\n5-Return a movie\n",
+        assertEquals("1-Quit App\n2-List of available books\n3-Return a book\n4-List of available movies\n5-Return a movie\n"
+                +"6-Show User Information\n",
                 menu.showMenu(RolEnum.ROL_BASIC));
     }
 
@@ -19,8 +20,10 @@ public class MenuTest {
         menu.setPredefinedMenu();
 
         assertEquals("1-Quit App\n2-List of available books\n3-Return a book\n" +
-                        "4-List of available movies\n5-Return a movie\n6-Librarian, you can view checked out books\n" +
-                "7-Librarian, you can view checked out movies\n",
+                        "4-List of available movies\n5-Return a movie\n"
+                        +"6-Show User Information\n"
+                        +"7-Librarian, you can view checked out books\n"
+                        +"8-Librarian, you can view checked out movies\n",
                 menu.showMenu(RolEnum.ROL_ADMIN));
     }
 
