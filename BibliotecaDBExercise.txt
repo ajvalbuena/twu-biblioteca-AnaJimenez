@@ -1,0 +1,57 @@
+
+ --- QUESTION 1
+
+  SELECT member.name FROM member WHERE member.id IN (SELECT checkout_item.member_id FROM checkout_item, book WHERE checkout_item.book_id = book.id AND book.title = 'The Hobbit');
+
+Answer: Anand Beck
+
+
+ --- QUESTION 2
+
+ SELECT COUNT(*) FROM member WHERE member.id NOT IN (SELECT checkout_item.member_id FROM checkout_item);
+
+Answer: 37
+
+ --- QUESTION 3
+
+ SELECT book.title FROM book  WHERE book.id NOT IN (SELECT checkout_item.book_id FROM checkout_item WHERE checkout_item.book_id not null) UNION SELECT movie.title FROM movie WHERE movie.id NOT IN (SELECT checkout_item.movie_id FROM checkout_item WHERE checkout_item.movie_id not null);
+
+Answer:
+1984
+Catcher in the Rye
+Crouching Tiger, Hidden Dragon
+Domain Driven Design
+Fellowship of the Ring
+Lawrence of Arabia
+Office Space
+Thin Red Line
+To Kill a Mockingbird
+Tom Sawyer
+
+ --- QUESTION 4
+
+INSERT INTO book (title) VALUES ("The Pragmatic Programmer");
+INSERT INTO member (name) VALUES ("Ana Jimenez");
+
+INSERT INTO checkout_item (member_id, book_id) VALUES ((SELECT member.id FROM member WHERE name ="Ana Jimenez"), (SELECT book.id FROM book WHERE title ="The Pragmatic Programmer"));
+
+ SELECT member.name FROM member WHERE member.id IN (SELECT checkout_item.member_id FROM checkout_item, book WHERE checkout_item.book_id = book.id AND book.title = 'The Pragmatic Programmer');
+
+
+
+ --- QUESTION 5
+
+ SELECT name FROM member WHERE member.id IN (SELECT member_id FROM checkout_item WHERE member_id IS NOT NULL GROUP BY member_id HAVING count(*)>1);
+
+Answer:
+Anand Beck
+Frank Smith
+
+
+
+
+
+
+
+
+ 
